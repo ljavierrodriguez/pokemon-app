@@ -4,10 +4,7 @@ export default class PokemonModal extends Component {
     constructor(props){
         super(props);
         this.state = {
-            info: {
-                abilities: [],
-                name: ""
-            },
+            info: null,
         }
         this.getPokemonInfo = this.getPokemonInfo.bind(this);
     }
@@ -45,7 +42,20 @@ export default class PokemonModal extends Component {
                             </button>
                         </div>
                         <div className="modal-body">
-                            {this.state.info.name}
+                            { this.state.info ?
+                                <div>
+                                    {this.state.info.name}
+                                    <ul>
+                                    {this.state.info.abilities.map((item, i) => {
+                                       return <li key={i}>{item.ability.name}</li>
+                                   })}
+                                    </ul>
+                                </div>
+                                :
+                                <div>
+                                    Loading...
+                                </div>
+                                }
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
